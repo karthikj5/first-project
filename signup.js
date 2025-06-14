@@ -2,14 +2,12 @@ const mysql = require('mysql');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-
 const connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'newuser',
 	password : 'Newmysql@123',
 	database : 'userdb'
 });
-
 const app = express();
 app.use(session({
 	secret: 'secret',
@@ -19,13 +17,11 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
-
 // http://localhost:3000/
 app.get('/', function(request, response) {
 	// Render login template
 	response.sendFile(path.join(__dirname + '/signup.html'));
 });
-
 // http://localhost:3000/new
 app.post('/register', function(request, response) {
 	// Capture the input fields
@@ -50,8 +46,7 @@ app.post('/register', function(request, response) {
                   }
                 var sql = 'INSERT INTO userTable SET ?';
                 connection.query(sql,users, function(error,results){
-                    if (error) throw error;
-                    
+                    if (error) throw error; 
                 });
                 response.send('entered into db!');
             }		
@@ -62,7 +57,6 @@ app.post('/register', function(request, response) {
 		response.end();
 	}
 });
-
 // http://localhost:3000/home
 app.get('/home', function(request, response) {
 	// If the user is loggedin
@@ -75,5 +69,4 @@ app.get('/home', function(request, response) {
 	}
 	response.end();
 });
-
 app.listen(3000);
