@@ -1,2 +1,2 @@
-# first-project
+# sms-spam-project
 FIRST REPO
